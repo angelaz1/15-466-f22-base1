@@ -81,13 +81,13 @@ if $(OS) = NT { #Windows
 	NEST_LIBS = ../nest-libs/linux ;
 	C++ = g++ -no-pie ;
 	C++FLAGS =
-		-std=c++14 -g -Wall -Werror
+		-std=c++17 -g -lstdc++fs -Wall -Werror
 		`'$(NEST_LIBS)/SDL2/bin/sdl2-config' --prefix='$(NEST_LIBS)/SDL2' --cflags` #SDL2
 		-I$(NEST_LIBS)/glm/include                                                  #glm
 		-I$(NEST_LIBS)/libpng/include                                               #libpng
 		;
 	LINK = g++ -no-pie ;
-	LINKFLAGS = -std=c++14 -g -Wall -Werror ;
+	LINKFLAGS = -std=c++17 -g -Wall -Werror ;
 	LINKLIBS =
 		`'$(NEST_LIBS)/SDL2/bin/sdl2-config' --prefix='$(NEST_LIBS)/SDL2' --static-libs` -lGL #SDL2
 		-L$(NEST_LIBS)/libpng/lib -lpng                                                       #libpng
@@ -129,4 +129,21 @@ LOCATE_TARGET = objs ; #put objects in 'objs' directory
 Objects $(GAME_NAMES:S=.cpp) ;
 
 LOCATE_TARGET = dist ; #put main in 'dist' directory
-MainFromObjects game : $(GAME_NAMES:S=$(SUFOBJ)) ;
+MainFromObjects KaraSoko : $(GAME_NAMES:S=$(SUFOBJ)) ;
+
+# Building an assets pipeline
+# Referenced https://www.boost.org/doc/libs/1_31_0/tools/build/jam_src/Jamfile.html for documentation
+# And above code for building a game
+
+# Store names of all .cpp files to build into a variable:
+ASSET_NAMES = 
+	asset_processing 
+	load_save_png 
+	data_path
+	;
+
+LOCATE_TARGET = objs ;
+Objects $(ASSET_NAMES:S=.cpp) ;
+
+LOCATE_TARGET = assets ;
+MainFromObjects LoadAssets : $(ASSET_NAMES:S=$(SUFOBJ)) ; 
