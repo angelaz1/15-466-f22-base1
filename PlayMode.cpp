@@ -420,9 +420,9 @@ void PlayMode::update(float elapsed) {
 		}
 
 		// Check for button press
-		uint8_t box_row = box_pos.y / grid_tile_size - grid_start_y;
-		uint8_t box_col = box_pos.x / grid_tile_size - grid_start_x;
-		uint32_t current_index = get_index(box_row, box_col);
+		uint8_t box_pos_row = box_pos.y / grid_tile_size - grid_start_y;
+		uint8_t box_pos_col = box_pos.x / grid_tile_size - grid_start_x;
+		uint32_t current_index = get_index(box_pos_row, box_pos_col);
 		if (current_index != box_last_index && game_map[current_index] != CellEmpty && gameState == RepeatSequence) {
 			// Count button press
 			LightColor hit_light = get_light_from_button(game_map[current_index]);
