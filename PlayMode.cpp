@@ -179,7 +179,7 @@ bool PlayMode::handle_event(SDL_Event const &evt, glm::uvec2 const &window_size)
 }
 
 void PlayMode::randomize_buttons() {
-	for (uint i = 0; i < grid_width * grid_height; i++) {
+	for (uint32_t i = 0; i < grid_width * grid_height; i++) {
 		game_map[i] = CellEmpty;
 	}
 
@@ -278,7 +278,7 @@ glm::u8vec2 PlayMode::get_pos_vec(uint8_t row, uint8_t col, bool use_grid_start)
 	return glm::u8vec2(col * grid_tile_size, row * grid_tile_size);
 }
 
-uint PlayMode::get_index(uint8_t row, uint8_t col) {
+uint32_t PlayMode::get_index(uint8_t row, uint8_t col) {
 	return row * grid_width + col;
 }
 
@@ -422,7 +422,7 @@ void PlayMode::update(float elapsed) {
 		// Check for button press
 		uint8_t box_row = box_pos.y / grid_tile_size - grid_start_y;
 		uint8_t box_col = box_pos.x / grid_tile_size - grid_start_x;
-		uint current_index = get_index(box_row, box_col);
+		uint32_t current_index = get_index(box_row, box_col);
 		if (current_index != box_last_index && game_map[current_index] != CellEmpty && gameState == RepeatSequence) {
 			// Count button press
 			LightColor hit_light = get_light_from_button(game_map[current_index]);

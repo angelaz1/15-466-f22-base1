@@ -86,7 +86,7 @@ private:
 	glm::u8vec2 box_travel_dir = glm::u8vec2();
 	uint8_t box_target_dist = 0;
 	const uint8_t box_travel_speed = 200;
-	uint box_last_index = 0;
+	uint32_t box_last_index = 0;
 
 	// Memory game aspects
 	// Managing the lights that are displayed
@@ -132,7 +132,7 @@ private:
 	// Lives + Score
 	const uint8_t max_lives = 3;
 	uint8_t lives = max_lives;
-	uint score = 0;
+	uint32_t score = 0;
 
 	// A dictionary containing mappings from sprite name -> loaded sprite
 	std::unordered_map<std::string, LoadedSprite> sprite_mapping;
@@ -157,7 +157,7 @@ private:
 	glm::u8vec2 get_pos_vec(uint8_t row, uint8_t col, bool use_grid_start);
 
 	// Given row/col, gets the index in the grid
-	uint get_index(uint8_t row, uint8_t col);
+	uint32_t get_index(uint8_t row, uint8_t col);
 
 	// Read player input
 	void read_player_input();
